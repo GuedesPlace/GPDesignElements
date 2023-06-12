@@ -15,6 +15,24 @@ export const Basic: Story = (args: any) => (
     <GPLayout data-testId="InputField-id" {...args} />
 );
 Basic.args = {
-    title:"GP Minimal Attributes setted"
+    title: "GP Minimal Attributes setted"
+};
+
+export const WithHeaderLinks: Story = (args: any) => (
+    <GPLayout data-testId="InputField-id" {...args} />
+);
+WithHeaderLinks.args = {
+    title: "HeaderLinks",
+    linkItems: [{
+        id: 'dasboardId',
+        title: 'The Dasboard',
+        onClick: (id: string) => console.log(id)
+    },
+    {
+        id: 'createId',
+        title: 'CREATE',
+        onClick: (id: string) => console.log(id)
+    }
+    ]
 };
 
