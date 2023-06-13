@@ -1,6 +1,6 @@
 import { ActionButton, Link, Stack, StackItem, Text, getTheme, useTheme } from "@fluentui/react";
 import React from "react";
-import { IActionableLinkProps, IUserInformation, UserInformationEventType } from "../../common";
+import { IActionableLinkProp, IUserInformation, UserInformationEventType } from "../../common";
 import { HeaderLinks } from "./HeaderLinks";
 import { UserInformationHeaderBlock } from "./UserInformationHeaderBlock";
 
@@ -9,8 +9,8 @@ export interface IHeaderLineProps {
     backgroundColor?: string;
     lineColor?: string;
     titleColor?: string;
-    linkItems?: IActionableLinkProps[];
-    applicationItems?: IActionableLinkProps[];
+    linkItems?: IActionableLinkProp[];
+    applicationItems?: IActionableLinkProp[];
     userInformation?:IUserInformation;
     onUserInformationEvent: (userInformationEventType:UserInformationEventType) => void;
 

@@ -1,9 +1,9 @@
 import { ActionButton, Link, Stack, getTheme, useTheme } from "@fluentui/react";
 import React from "react";
-import { IActionableLinkProps } from "../../common";
+import { IActionableLinkProp } from "../../common";
 
 export interface IHeaderLinksProps {
-    linkItems?: IActionableLinkProps[];
+    linkItems?: IActionableLinkProp[];
 }
 
 export const HeaderLinks: React.FunctionComponent<IHeaderLinksProps> = (props: IHeaderLinksProps) => {

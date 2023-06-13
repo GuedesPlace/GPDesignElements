@@ -1,18 +1,20 @@
-import { PrimaryButton, Stack, StackItem, Theme, ThemeProvider, createTheme, initializeIcons } from "@fluentui/react";
+import { Stack, StackItem, Theme, ThemeProvider, createTheme, initializeIcons } from "@fluentui/react";
 import React from "react";
 import { HeaderLine } from "./HeaderLine";
-import { IActionableLinkProps, IUserInformation, UserInformationEventType } from "../../common";
+import { IActionableLinkProp, IApplicationLinkProp, IUserInformation, UserInformationEventType } from "../../common";
+import { MainBlock } from "./MainBlock";
 
 export interface IGPLayoutProps {
     title: string;
     backgroundColor?: string;
     lineColor?: string;
     titleColor?: string;
-    linkItems?: IActionableLinkProps[];
-    applicationItems?: IActionableLinkProps[];
-    userInformation?:IUserInformation;
+    linkItems?: IActionableLinkProp[];
+    applicationItems?: IApplicationLinkProp[];
+    userInformation?: IUserInformation;
     theme?: Theme;
-    onUserInformationEvent: (userInformationEventType:UserInformationEventType) => void;
+    onUserInformationEvent: (userInformationEventType: UserInformationEventType) => void;
+    selectedApplicationId?: string;
 }
 initializeIcons();
 const gpTheme = createTheme({
@@ -59,7 +61,11 @@ export const GPLayout: React.FunctionComponent<IGPLayoutProps> = (props: IGPLayo
 
                 />
             </StackItem>
-            <StackItem grow={10}>MittlePart</StackItem>
+            <StackItem grow={10}>
+                <MainBlock
+                    applicationLinks={props.applicationItems}
+                    selectedApplicationId={props.selectedApplicationId} />
+            </StackItem>
             <StackItem>FooterLine</StackItem>
         </Stack>
     </ThemeProvider>;
