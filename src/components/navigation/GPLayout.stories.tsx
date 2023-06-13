@@ -57,5 +57,31 @@ LoggedIn.args = {
         oganisationName:"Does graeat big Family"
     }
 };
+export const Applications: Story = (args: any) => (
+    <GPLayout data-testId="InputField-id" {...args} />
+);
+Applications.args = {
+    title: "This is Loggedin",
+    linkItems: [{
+        id: 'dasboardId',
+        title: 'The Dasboard',
+        onClick: (id: string) => console.log(id)
+    },
+    {
+        id: 'createId',
+        title: 'CREATE',
+        onClick: (id: string) => console.log(id)
+    }
+    ],
+    userInformation:{
+        commonName:"John Doe",
+        eMail:"j@doe.family",
+        oganisationName:"Does graeat big Family"
+    },
+    applicationItems:[
+        {title:'Photos',iconName:"PhotoVideoMedia",id:'photos',onClick:()=>console.log("photos")},
+        {title:'Profile',iconName:"ProfileSearch",id:'UserOptional',onClick:()=>console.log("profiles")}
+    ]
+};
 
 
