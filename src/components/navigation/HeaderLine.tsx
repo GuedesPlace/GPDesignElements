@@ -1,6 +1,8 @@
-import { Link, Stack, StackItem, Text } from "@fluentui/react";
+import { ActionButton, Link, Stack, StackItem, Text, getTheme, useTheme } from "@fluentui/react";
 import React from "react";
-import { IActionableLinkProps } from "../../common";
+import { IActionableLinkProps, IUserInformation, UserInformationEventType } from "../../common";
+import { HeaderLinks } from "./HeaderLinks";
+import { UserInformationHeaderBlock } from "./UserInformationHeaderBlock";
 
 export interface IHeaderLineProps {
     title: string;
@@ -9,15 +11,20 @@ export interface IHeaderLineProps {
     titleColor?: string;
     linkItems?: IActionableLinkProps[];
     applicationItems?: IActionableLinkProps[];
+    userInformation?:IUserInformation;
+    onUserInformationEvent: (userInformationEventType:UserInformationEventType) => void;
+
 }
 
+
 export const HeaderLine: React.FunctionComponent<IHeaderLineProps> = (props: IHeaderLineProps) => {
-    const bgColor = React.useMemo(() => props.backgroundColor ? props.backgroundColor : "#06935a", [props.backgroundColor]);
-    const lineColor = React.useMemo(() => props.lineColor ? props.lineColor : "#014f30", [props.lineColor]);
-    const titleColor = React.useMemo(() => props.titleColor ? props.titleColor : "#101010", [props.titleColor]);
+    const theme = useTheme();
+    const bgColor = React.useMemo(() => props.backgroundColor ? props.backgroundColor : theme.palette.themeDark, [props.backgroundColor]);
+    const lineColor = React.useMemo(() => props.lineColor ? props.lineColor : theme.palette.themeDarker, [props.lineColor]);
+    const titleColor = React.useMemo(() => props.titleColor ? props.titleColor : theme.palette.white, [props.titleColor]);
     return <Stack horizontal
         verticalAlign="center"
-        style={{ gap: "5px" }}
+        style={{ gap: "8px", width:"100%"}}
         styles={{
             root: {
                 backgroundColor: bgColor,
@@ -25,11 +32,20 @@ export const HeaderLine: React.FunctionComponent<IHeaderLineProps> = (props: IHe
                 borderBottomWidth: "1px",
                 borderBottomStyle: "solid",
                 boxShadow: "0px 2px 0px grey;",
-                height: "32px",
-                paddingLeft: "5px"
+                height: "34px",
+                paddingLeft: "5px",
             }
         }}>
-        <Text variant="xLarge" color={titleColor}>{props.title}</Text>
-        {props.linkItems ? props.linkItems.map(item => <Link key={item.id} onClick={() => item.onClick(item.id)}>{item.title}</Link>) : null}
+        <StackItem align="end"><Text variant="xLarge" style={{color:titleColor}}>{props.title}</Text></StackItem>
+        <StackItem align="end"><HeaderLinks linkItems={props.linkItems}></HeaderLinks></StackItem>
+        <StackItem grow={10}>&nbsp;</StackItem>
+        <StackItem align="end"><UserInformationHeaderBlock 
+            onLogin={()=>props.onUserInformationEvent(UserInformationEventType.LOGIN)} 
+            onLogout={()=>props.onUserInformationEvent(UserInformationEventType.LOGOUT)}
+            onProfiles={()=>props.onUserInformationEvent(UserInformationEventType.PROFILE)}
+            onSettings={()=>props.onUserInformationEvent(UserInformationEventType.SETTINGS)}
+            userInformation={props.userInformation}
+            />
+        </StackItem>
     </Stack>
 }

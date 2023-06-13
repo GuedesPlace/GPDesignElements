@@ -35,4 +35,27 @@ WithHeaderLinks.args = {
     }
     ]
 };
+export const LoggedIn: Story = (args: any) => (
+    <GPLayout data-testId="InputField-id" {...args} />
+);
+LoggedIn.args = {
+    title: "This is Loggedin",
+    linkItems: [{
+        id: 'dasboardId',
+        title: 'The Dasboard',
+        onClick: (id: string) => console.log(id)
+    },
+    {
+        id: 'createId',
+        title: 'CREATE',
+        onClick: (id: string) => console.log(id)
+    }
+    ],
+    userInformation:{
+        commonName:"John Doe",
+        eMail:"j@doe.family",
+        oganisationName:"Does graeat big Family"
+    }
+};
+
 
