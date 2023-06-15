@@ -3,6 +3,7 @@ import React from "react";
 import { HeaderLine } from "./HeaderLine";
 import { IActionableLinkProp, IApplicationLinkProp, IUserInformation, UserInformationEventType } from "../../common";
 import { MainBlock } from "./MainBlock";
+import { FooterLine } from "./FooterLine";
 
 export interface IGPLayoutProps {
     title: string;
@@ -15,6 +16,9 @@ export interface IGPLayoutProps {
     theme?: Theme;
     onUserInformationEvent: (userInformationEventType: UserInformationEventType) => void;
     selectedApplicationId?: string;
+    version:string;
+    applicationInformations?:IActionableLinkProp[];
+
 }
 initializeIcons();
 const gpTheme = createTheme({
@@ -66,7 +70,11 @@ export const GPLayout: React.FunctionComponent<IGPLayoutProps> = (props: IGPLayo
                     applicationLinks={props.applicationItems}
                     selectedApplicationId={props.selectedApplicationId} />
             </StackItem>
-            <StackItem>FooterLine</StackItem>
+            <StackItem>
+                <FooterLine 
+                    version={props.version} 
+                    applicationInformations={props.applicationInformations} />
+                </StackItem>
         </Stack>
     </ThemeProvider>;
 }

@@ -65,12 +65,12 @@ Applications.args = {
     linkItems: [{
         id: 'dasboardId',
         title: 'The Dasboard',
-        onClick: (id: string) => console.log(id)
+        onClick:(id)=>console.log(id)
     },
     {
         id: 'createId',
         title: 'CREATE',
-        onClick: (id: string) => console.log(id)
+        onClick:(id)=>console.log(id)
     }
     ],
     userInformation:{
@@ -80,8 +80,19 @@ Applications.args = {
     },
     applicationItems:[
         {title:'Photos',iconName:"PhotoVideoMedia",id:'photos',onClick:()=>console.log("photos")},
-        {title:'Profile',iconName:"ProfileSearch",id:'UserOptional',onClick:()=>console.log("profiles")}
-    ]
+        {title:'Profile',iconName:"ProfileSearch",id:'profiles',onClick:(id)=>console.log(id)}
+    ],
+    version:"0.1.9-beta22",
+    applicationInformations:[{
+        id:"memory",
+        title:"Used Memory: 50 GB",
+        onClick:(id)=>console.log(id)
+    },{
+        id:"memory2",
+        title:"Free Memory: 5 GB",
+        onClick:(id)=>console.log(id)
+    }],
+    selectedApplicationId:"photos"
 };
 
 
