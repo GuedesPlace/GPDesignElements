@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`changes the class when hovered 1`] = `
+<div
+  className="ms-Stack css-109"
+  style={
+    Object {
+      "margin": "15px",
+    }
+  }
+>
+  <div
+    className="ms-StackItem css-110"
+  >
+    <div
+      className="ms-Stack css-111"
+    >
+      <div
+        className="ms-StackItem css-112"
+      >
+        <span
+          className="css-113"
+        >
+          Hello World
+        </span>
+      </div>
+      <div
+        className="ms-StackItem css-112"
+      >
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>
+`;
