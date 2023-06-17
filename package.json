@@ -1,6 +1,6 @@
 {
   "name": "@guedesplace/designelements",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React UI Elements, based on Fluent UI",
   "scripts": {
     "start": "react-scripts start",
