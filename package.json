@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/guedeWebGate/GPDesignElements.git"
+    "url": "git+https://github.com/GuedesPlace/GPDesignElements.git"
   },
   "author": "Christian Guedemann",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/guedeWebGate/GPDesignElements/issues"
+    "url": "https://github.com/GuedesPlace/GPDesignElements/issues"
   },
-  "homepage": "https://github.com/guedeWebGate/GPDesignElements#readme",
+  "homepage": "https://github.com/GuedesPlace/GPDesignElements#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@rollup/plugin-commonjs": "^21.0.2",
@@ -63,5 +63,6 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "private":false
 }
