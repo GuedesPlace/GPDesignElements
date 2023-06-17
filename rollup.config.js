@@ -26,7 +26,7 @@ export default [
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json", exclude: ["**/__tests__/**", "**/*.test.ts"] }),
+      typescript({ tsconfig: "./tsconfig.json", exclude: ["**/__tests__/**", "**/*.test.ts", '**/*.stories.tsx'] }),
       terser(),
     ],
   },

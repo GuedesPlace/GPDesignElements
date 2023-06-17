@@ -24,7 +24,7 @@ export const HeaderLine: React.FunctionComponent<IHeaderLineProps> = (props: IHe
     const titleColor = React.useMemo(() => props.titleColor ? props.titleColor : theme.palette.white, [props.titleColor]);
     return <Stack horizontal
         verticalAlign="center"
-        style={{ gap: "8px", width:"100%"}}
+        style={{ gap: "20px", width:"100%"}}
         styles={{
             root: {
                 backgroundColor: bgColor,
@@ -32,8 +32,9 @@ export const HeaderLine: React.FunctionComponent<IHeaderLineProps> = (props: IHe
                 borderBottomWidth: "1px",
                 borderBottomStyle: "solid",
                 boxShadow: "0px 2px 0px grey;",
-                height: "34px",
+                height: "38px",
                 paddingLeft: "5px",
+                paddingBottom:"2px"
             }
         }}>
         <StackItem align="end"><Text variant="xLarge" style={{color:titleColor}}>{props.title}</Text></StackItem>

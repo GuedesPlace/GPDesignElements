@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { GPLayout } from "./GPLayout";
+import { Text } from "@fluentui/react";
 
 const meta: Meta<typeof GPLayout> = {
     component: GPLayout,
@@ -93,6 +94,44 @@ Applications.args = {
         onClick:(id)=>console.log(id)
     }],
     selectedApplicationId:"photos"
+};
+export const ApplicationAndContent: Story = (args: any) => (
+    <GPLayout data-testId="InputField-id" {...args} />
+);
+ApplicationAndContent.args = {
+    title: "This is Loggedin",
+    linkItems: [{
+        id: 'dasboardId',
+        title: 'The Dasboard',
+        onClick:(id)=>console.log(id)
+    },
+    {
+        id: 'createId',
+        title: 'CREATE',
+        onClick:(id)=>console.log(id)
+    }
+    ],
+    userInformation:{
+        commonName:"John Doe",
+        eMail:"j@doe.family",
+        oganisationName:"Does graeat big Family"
+    },
+    applicationItems:[
+        {title:'Photos',iconName:"PhotoVideoMedia",id:'photos',onClick:()=>console.log("photos")},
+        {title:'Profile',iconName:"ProfileSearch",id:'profiles',onClick:(id)=>console.log(id)}
+    ],
+    version:"0.1.9-beta22",
+    applicationInformations:[{
+        id:"memory",
+        title:"Used Memory: 50 GB",
+        onClick:(id)=>console.log(id)
+    },{
+        id:"memory2",
+        title:"Free Memory: 5 GB",
+        onClick:(id)=>console.log(id)
+    }],
+    selectedApplicationId:"photos",
+    children: <><Text variant="mediumPlus">This is my Content</Text></>
 };
 
 

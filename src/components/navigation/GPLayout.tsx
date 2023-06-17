@@ -1,5 +1,5 @@
 import { Stack, StackItem, Theme, ThemeProvider, createTheme, initializeIcons } from "@fluentui/react";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { HeaderLine } from "./HeaderLine";
 import { IActionableLinkProp, IApplicationLinkProp, IUserInformation, UserInformationEventType } from "../../common";
 import { MainBlock } from "./MainBlock";
@@ -49,7 +49,7 @@ const gpTheme = createTheme({
     }
 });
 
-export const GPLayout: React.FunctionComponent<IGPLayoutProps> = (props: IGPLayoutProps) => {
+export const GPLayout: React.FunctionComponent<PropsWithChildren<IGPLayoutProps>> = (props: PropsWithChildren<IGPLayoutProps>) => {
     return <ThemeProvider theme={props.theme ? props.theme : gpTheme}>
         <Stack styles={{ root: { height: "100%", minHeight: "100%", position: "fixed", top: 0, left: 0, width: "100%" } }} verticalAlign="space-between">
             <StackItem>
@@ -68,7 +68,9 @@ export const GPLayout: React.FunctionComponent<IGPLayoutProps> = (props: IGPLayo
             <StackItem grow={10}>
                 <MainBlock
                     applicationLinks={props.applicationItems}
-                    selectedApplicationId={props.selectedApplicationId} />
+                    selectedApplicationId={props.selectedApplicationId}>
+                        {props.children}
+                    </MainBlock>
             </StackItem>
             <StackItem>
                 <FooterLine 
