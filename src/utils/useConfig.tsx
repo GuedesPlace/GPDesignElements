@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { defaultConfig, DynamicConfig } from "../models";
 
-interface DynamicConfigContext {
+export interface DynamicConfigContext {
   config: DynamicConfig;
   setConfig: (newConfig: DynamicConfig) => void;
 }
@@ -16,7 +16,7 @@ type Props = {
     children?: React.ReactNode
   };
 
-const ConfigContextProvider: React.FunctionComponent<Props> = ({ children }) => {
+export const ConfigContextProvider: React.FunctionComponent<Props> = ({ children }) => {
   const [configState, setConfigState] = useState(defaultConfig);
 
   return (
@@ -30,5 +30,3 @@ const ConfigContextProvider: React.FunctionComponent<Props> = ({ children }) => 
     </configContextObject.Provider>
   );
 };
-
-export default ConfigContextProvider;
