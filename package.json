@@ -1,7 +1,8 @@
 {
   "name": "@guedesplace/designelements",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React UI Elements, based on Fluent UI",
+  "private":false,
   "scripts": {
     "start": "react-scripts start",
     "test": "jest",
@@ -63,6 +64,5 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "sideEffects": false,
-  "private":false
+  "sideEffects": false
 }
