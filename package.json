@@ -2,7 +2,7 @@
   "name": "@guedesplace/designelements",
   "version": "0.1.3",
   "description": "React UI Elements, based on Fluent UI",
-  "private":false,
+  "private": false,
   "scripts": {
     "start": "react-scripts start",
     "test": "jest",
@@ -64,5 +64,8 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
 }
