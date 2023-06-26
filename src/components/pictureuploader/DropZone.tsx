@@ -1,5 +1,6 @@
 import { IconButton, mergeStyles, useTheme } from "@fluentui/react";
 import React from "react";
+import { mapFileListToArray } from "../../utils";
 
 export interface IDropZone {
     onClick: () => void;
@@ -13,16 +14,7 @@ const iconClass = mergeStyles({
     height: 50,
     width: 50,
 });
-const mapFileListToArray = (files: FileList) => {
-    const array: File[] = [];
-    for (let i = 0; i < files.length; i++) {
-        const file = files.item(i);
-        if (file && file != null) {
-            array.push(file);
-        }
-    }
-    return array
-}
+
 export const DropZone: React.FunctionComponent<IDropZone> = (props: IDropZone) => {
     const theme = useTheme();
     const dropZoneRef = React.useRef<null | HTMLDivElement>(null);

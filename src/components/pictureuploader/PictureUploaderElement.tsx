@@ -3,6 +3,8 @@ import { IPictureUpload, PictureUploadStatus } from "../../models";
 import { IconButton, Stack, StackItem, Text, mergeStyles } from "@fluentui/react";
 import { DropZone } from "./DropZone";
 import { v4 as uuidv4 } from 'uuid';
+import { mapFileListToArray } from "../../utils";
+import { Thumbnail } from "./Thumbnail";
 
 export interface IPictureUploaderProps {
     title?: string;
@@ -13,31 +15,43 @@ export interface IPictureUploaderProps {
     onUploadStart: (picturesToUpload: IPictureUpload[]) => void;
 }
 
-const createPictureUpload = (file:File):IPictureUpload => ({
-    id:uuidv4(),
-    file:file,
-    status:PictureUploadStatus.SELECTED
+const createPictureUpload = (file: File): IPictureUpload => ({
+    id: uuidv4(),
+    file: file,
+    status: PictureUploadStatus.SELECTED
 });
 
 
 export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (props: IPictureUploaderProps) => {
-    const [currentFiles,setCurrentFiles] = React.useState<IPictureUpload[]>([]);
-    const addFiles = React.useCallback((files:File[])=>{
-        const allFiles = files.map(createPictureUpload);
-        setCurrentFiles([...currentFiles,...allFiles]);
-    },[currentFiles]);
+    const [currentFiles, setCurrentFiles] = React.useState<IPictureUpload[]>([]);
+    const [addFiles, setAddFiles] = React.useState<IPictureUpload[]>([]);
+    const fileInputRef = React.useRef<null | HTMLInputElement>(null);
+    React.useEffect(() => setCurrentFiles([...currentFiles, ...addFiles]), [addFiles]);
+    const handleChange = (event: any) => {
+        console.log(event);
+        event.preventDefault();
+        const files = mapFileListToArray(event.target.files);
+        setAddFiles(files.map(createPictureUpload));
+        if (fileInputRef && fileInputRef.current){
+            fileInputRef.current.value ='';
+        }
+
+    }
     return <Stack>
-        <StackItem><Text variant="large">Der Titel</Text></StackItem>
-        <hr></hr>
-        <StackItem><Text variant="medium" >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </Text></StackItem>
-        <StackItem align="center" style={{marginTop:"20px"}}>
-            <DropZone 
-                onClick={() => console.log("click")} 
-                onDropFiles={addFiles}
-                    />
+        {props.title ? <StackItem><Text variant="large">{props.title}</Text></StackItem> : null}
+        {props.title && props.instructions ? <StackItem><hr></hr></StackItem> : null}
+        {props.instructions ? <StackItem><Text variant="medium" >
+            {props.instructions}
+        </Text></StackItem> : null}
+        <StackItem align="center" style={{ marginTop: "20px" }}>
+            <input onChange={handleChange} multiple={false} ref={fileInputRef} type='file' hidden />
+            <DropZone
+                onClick={() => fileInputRef.current?.click()}
+                onDropFiles={(f) => setAddFiles(f.map(createPictureUpload))}
+            />
         </StackItem>
         <Text>Files selected: {currentFiles.length}</Text>
+        <Stack horizontal wrap tokens={{childrenGap:"5px"}}>{currentFiles.map(file=>
+         <Thumbnail key={file.id} picture={file} onRemove={(id)=>setCurrentFiles(currentFiles.filter((f)=>f.id != id))}></Thumbnail>)}</Stack>
     </Stack>
 }

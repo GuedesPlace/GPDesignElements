@@ -1,5 +1,6 @@
+import { initializeIcons } from "@fluentui/react";
 import type { Preview } from "@storybook/react";
-
+initializeIcons();
 const preview: Preview = {
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
