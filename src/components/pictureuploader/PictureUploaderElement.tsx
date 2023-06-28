@@ -1,6 +1,6 @@
 import React from "react";
 import { IPictureUpload, PictureUploadStatus } from "../../models";
-import { IconButton, PrimaryButton, Stack, StackItem, Text, mergeStyles } from "@fluentui/react";
+import { PrimaryButton, Stack, StackItem, Text } from "@fluentui/react";
 import { DropZone } from "./DropZone";
 import { v4 as uuidv4 } from 'uuid';
 import { mapFileListToArray } from "../../utils";
@@ -26,21 +26,38 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
     const [currentFiles, setCurrentFiles] = React.useState<IPictureUpload[]>([]);
     const [addFiles, setAddFiles] = React.useState<IPictureUpload[]>([]);
     const fileInputRef = React.useRef<null | HTMLInputElement>(null);
-    const uploadDisabled = React.useMemo(()=>currentFiles.filter(f=>f.status == PictureUploadStatus.SELECTED).length == 0,[currentFiles]);
-    React.useEffect(() => setCurrentFiles([...currentFiles, ...addFiles]), [addFiles]);
+    const uploadDisabled = React.useMemo(() => currentFiles.filter(f => f.status == PictureUploadStatus.SELECTED).length == 0, [currentFiles]);
+    React.useEffect(() => {
+        const newFilesToAdd = addFiles.filter(f=>!currentFiles.find(cf=>cf.id == f.id));
+        setCurrentFiles([...currentFiles, ...newFilesToAdd]);
+    }, [addFiles]);
+    React.useEffect(()=>{
+        console.log(props.uploadStatus);
+        const allFiles = [...currentFiles];
+        if (props.uploadStatus) {
+            props.uploadStatus.forEach(f=>{
+                const fCurrent = allFiles.find(fc=>fc.id == f.id);
+                if (fCurrent) {
+                    fCurrent.status = f.status;
+                    fCurrent.errorInformation = f.errorInformation;
+                }
+            });
+        }
+        setCurrentFiles(allFiles);
+    },[props.uploadStatus]);
     const handleChange = (event: any) => {
         event.preventDefault();
         const files = mapFileListToArray(event.target.files);
         setAddFiles(files.map(createPictureUpload));
-        if (fileInputRef && fileInputRef.current){
-            fileInputRef.current.value ='';
+        if (fileInputRef && fileInputRef.current) {
+            fileInputRef.current.value = '';
         }
 
     }
-    const handleUpload = (files:IPictureUpload[]) => {
-        const allFiles:IPictureUpload[] = [];
-        const filesToUpload = files.filter(f=>f.status == PictureUploadStatus.SELECTED);
-        files.forEach((f)=>{
+    const handleUpload = (files: IPictureUpload[]) => {
+        const allFiles: IPictureUpload[] = [];
+        const filesToUpload = files.filter(f => f.status == PictureUploadStatus.SELECTED);
+        files.forEach((f) => {
             if (f.status == PictureUploadStatus.SELECTED) {
                 f.status = PictureUploadStatus.UPLOADING;
             }
@@ -63,15 +80,15 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
             />
         </StackItem>
         <Text>Files selected: {currentFiles.length}</Text>
-        <Stack horizontal wrap tokens={{childrenGap:"5px"}}>{currentFiles.map(file=>
-         <Thumbnail key={file.id} picture={file} onRemove={(id)=>setCurrentFiles(currentFiles.filter((f)=>f.id != id))}></Thumbnail>)}
+        <Stack horizontal wrap tokens={{ childrenGap: "5px" }}>{currentFiles.map(file =>
+            <Thumbnail key={file.id} picture={file} onRemove={(id) => setCurrentFiles(currentFiles.filter((f) => f.id != id))}></Thumbnail>)}
         </Stack>
         <StackItem>
             <Stack horizontal horizontalAlign="end">
-                <PrimaryButton 
+                <PrimaryButton
                     disabled={uploadDisabled}
                     text="Upload"
-                    onClick={()=>handleUpload(currentFiles)} /></Stack>
+                    onClick={() => handleUpload(currentFiles)} /></Stack>
         </StackItem>
 
     </Stack>
