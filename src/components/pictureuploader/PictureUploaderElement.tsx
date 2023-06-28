@@ -1,6 +1,6 @@
 import React from "react";
 import { IPictureUpload, PictureUploadStatus } from "../../models";
-import { IconButton, Stack, StackItem, Text, mergeStyles } from "@fluentui/react";
+import { IconButton, PrimaryButton, Stack, StackItem, Text, mergeStyles } from "@fluentui/react";
 import { DropZone } from "./DropZone";
 import { v4 as uuidv4 } from 'uuid';
 import { mapFileListToArray } from "../../utils";
@@ -26,6 +26,7 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
     const [currentFiles, setCurrentFiles] = React.useState<IPictureUpload[]>([]);
     const [addFiles, setAddFiles] = React.useState<IPictureUpload[]>([]);
     const fileInputRef = React.useRef<null | HTMLInputElement>(null);
+    const uploadDisabled = React.useMemo(()=>currentFiles.filter(f=>f.status == PictureUploadStatus.SELECTED).length == 0,[currentFiles]);
     React.useEffect(() => setCurrentFiles([...currentFiles, ...addFiles]), [addFiles]);
     const handleChange = (event: any) => {
         console.log(event);
@@ -52,6 +53,15 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
         </StackItem>
         <Text>Files selected: {currentFiles.length}</Text>
         <Stack horizontal wrap tokens={{childrenGap:"5px"}}>{currentFiles.map(file=>
-         <Thumbnail key={file.id} picture={file} onRemove={(id)=>setCurrentFiles(currentFiles.filter((f)=>f.id != id))}></Thumbnail>)}</Stack>
+         <Thumbnail key={file.id} picture={file} onRemove={(id)=>setCurrentFiles(currentFiles.filter((f)=>f.id != id))}></Thumbnail>)}
+        </Stack>
+        <StackItem>
+            <Stack horizontal horizontalAlign="end">
+                <PrimaryButton 
+                    disabled={uploadDisabled}
+                    text="Upload"
+                    onClick={()=>props.onUploadStart(currentFiles.filter(f=>f.status==PictureUploadStatus.SELECTED))} /></Stack>
+        </StackItem>
+
     </Stack>
 }
