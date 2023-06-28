@@ -29,7 +29,6 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
     const uploadDisabled = React.useMemo(()=>currentFiles.filter(f=>f.status == PictureUploadStatus.SELECTED).length == 0,[currentFiles]);
     React.useEffect(() => setCurrentFiles([...currentFiles, ...addFiles]), [addFiles]);
     const handleChange = (event: any) => {
-        console.log(event);
         event.preventDefault();
         const files = mapFileListToArray(event.target.files);
         setAddFiles(files.map(createPictureUpload));
@@ -37,6 +36,18 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
             fileInputRef.current.value ='';
         }
 
+    }
+    const handleUpload = (files:IPictureUpload[]) => {
+        const allFiles:IPictureUpload[] = [];
+        const filesToUpload = files.filter(f=>f.status == PictureUploadStatus.SELECTED);
+        files.forEach((f)=>{
+            if (f.status == PictureUploadStatus.SELECTED) {
+                f.status = PictureUploadStatus.UPLOADING;
+            }
+            allFiles.push(f);
+        });
+        props.onUploadStart(filesToUpload);
+        setCurrentFiles(allFiles);
     }
     return <Stack>
         {props.title ? <StackItem><Text variant="large">{props.title}</Text></StackItem> : null}
@@ -60,7 +71,7 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
                 <PrimaryButton 
                     disabled={uploadDisabled}
                     text="Upload"
-                    onClick={()=>props.onUploadStart(currentFiles.filter(f=>f.status==PictureUploadStatus.SELECTED))} /></Stack>
+                    onClick={()=>handleUpload(currentFiles)} /></Stack>
         </StackItem>
 
     </Stack>

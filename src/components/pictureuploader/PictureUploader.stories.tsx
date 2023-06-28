@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import { PictureUploader } from "./PictureUploaderElement";
+import { PictureUploadStatus } from "../../models";
 
 const meta: Meta<typeof PictureUploader> = {
     component: PictureUploader,
@@ -16,7 +17,20 @@ export const Basic: Story = (args: any) => (
 );
 Basic.args = {
     title: "Do the Upload",
-    instructions:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    instructions:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    onUploadStart:(files)=>{
+        console.log(files);
+        files.forEach(f=>{
+            const fNew = {...f};
+            console.log(fNew);
+            setTimeout(()=>{
+                fNew.status == PictureUploadStatus.UPLOADED;
+                console.log(Basic);
+                Basic.args?.uploadStatus?.push(fNew);
+            },3000);
+        })
+    },
+    uploadStatus:[]
 };
 export const BasicNoTitle: Story = (args: any) => (
     <PictureUploader data-testId="InputField-id" {...args} />
