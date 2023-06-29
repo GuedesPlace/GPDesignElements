@@ -11,3 +11,8 @@ export interface IPictureUpload {
     errorInformation?:string;
 
 }
+export interface IPictureUploadAnswer {
+    id:string;
+    status:PictureUploadStatus;
+    errorInformation?:string;
+}

@@ -5,7 +5,7 @@ exports[`changes the class when hovered 1`] = `
   className="ms-Stack css-109"
   style={
     Object {
-      "margin": "15px",
+      "marginTop": "15px",
     }
   }
 >

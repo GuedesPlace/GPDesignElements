@@ -1,6 +1,7 @@
 import React from "react";
 import { IPictureUpload, PictureUploadStatus } from "../../models";
 import { Stack, StackItem, Image, ImageFit, Text, useTheme, IconButton, mergeStyles, FontIcon, Spinner, SpinnerSize } from "@fluentui/react";
+import { ErrorIndicator } from "../ui-elements";
 
 export interface IThumbnailProps {
     width?: number;
@@ -44,18 +45,18 @@ export const Thumbnail: React.FunctionComponent<IThumbnailProps> = (props: IThum
                             onClick={()=>props.onRemove(props.picture.id)}/> :null}
                     {props.picture.status == PictureUploadStatus.UPLOADED?
                         <FontIcon 
-                            iconName="checked" 
+                            iconName="CheckMark" 
                             style={ {fontSize: 10 } }
                             className={iconClass} 
                             /> :null}
                     {props.picture.status == PictureUploadStatus.UPLOADING?
                         <Spinner size={SpinnerSize.xSmall}/> :null}
                     {props.picture.status == PictureUploadStatus.ERROR?
-                        <FontIcon 
-                            iconName="Error" 
-                            style={ {fontSize: 10 } }
-                            className={iconClass} 
-                            /> :null}
+                        <ErrorIndicator
+                            errorText={props.picture.errorInformation+""}
+                            errorTitle="Error during upload!"
+                            size={10}
+                        /> :null}
                 </StackItem>
             </Stack>
         </StackItem>

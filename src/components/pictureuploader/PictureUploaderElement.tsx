@@ -1,5 +1,5 @@
 import React from "react";
-import { IPictureUpload, PictureUploadStatus } from "../../models";
+import { IPictureUpload, IPictureUploadAnswer, PictureUploadStatus } from "../../models";
 import { PrimaryButton, Stack, StackItem, Text } from "@fluentui/react";
 import { DropZone } from "./DropZone";
 import { v4 as uuidv4 } from 'uuid';
@@ -11,7 +11,7 @@ export interface IPictureUploaderProps {
     instructions?: string;
     fileTypes?: string[];
     iconName?: string;
-    uploadStatus: IPictureUpload[];
+    uploadStatus: IPictureUploadAnswer[];
     onUploadStart: (picturesToUpload: IPictureUpload[]) => void;
 }
 
@@ -32,7 +32,6 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
         setCurrentFiles([...currentFiles, ...newFilesToAdd]);
     }, [addFiles]);
     React.useEffect(()=>{
-        console.log(props.uploadStatus);
         const allFiles = [...currentFiles];
         if (props.uploadStatus) {
             props.uploadStatus.forEach(f=>{
