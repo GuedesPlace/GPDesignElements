@@ -6,6 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "jest",
+    "test::coverage": "jest --coverage",
     "test::watch": "jest --watch",
     "rollup": "rollup -c",
     "storybook": "storybook dev -p 6006",

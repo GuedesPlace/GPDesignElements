@@ -1,7 +1,7 @@
 import React from "react";
 import { IUserInformation } from "../../common";
-import { ContextualMenu, DefaultButton, DirectionalHint, IContextualMenuProps, IconButton, PrimaryButton, Stack, StackItem, Text, useTheme } from "@fluentui/react";
-import { useConst, useBoolean } from '@fluentui/react-hooks';
+import { DirectionalHint, IconButton, PrimaryButton, Stack, StackItem, Text, useTheme } from "@fluentui/react";
+import { useConst } from '@fluentui/react-hooks';
 
 
 export interface IUserInformationHeaderBlockProps {

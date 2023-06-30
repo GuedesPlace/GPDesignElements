@@ -1,4 +1,4 @@
-import { ActionButton, Link, Stack, StackItem, Text, getTheme, useTheme } from "@fluentui/react";
+import { Stack, StackItem, Text, useTheme } from "@fluentui/react";
 import React from "react";
 import { IActionableLinkProp, IUserInformation, UserInformationEventType } from "../../common";
 import { HeaderLinks } from "./HeaderLinks";
