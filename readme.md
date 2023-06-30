@@ -1,3 +1,5 @@
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=GuedesPlace_GPDesignElements&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=GuedesPlace_GPDesignElements)
+[![npm version](https://img.shields.io/npm/v/@guedesplace/designelements?style=flat-square)](https://www.npmjs.com/package/@guedesplace/designelements)
 # GP Design Elements
 This is a collection of react compontents build on top of Microsofts Fluent UI - Version 8. The main purpos is to share common components and also the navigation in all GuedesPlace applications.
 
