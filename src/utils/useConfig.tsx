@@ -18,13 +18,13 @@ type Props = {
 
 export const ConfigContextProvider: React.FunctionComponent<Props> = ({ children }) => {
   const [configState, setConfigState] = useState(defaultConfig);
-
+  const value = React.useMemo(()=>({
+    config: configState,
+    setConfig: setConfigState
+  }), [configState,setConfigState]);
   return (
     <configContextObject.Provider
-      value={{
-        config: configState,
-        setConfig: setConfigState
-      }}
+      value={value}
     >
       {children}
     </configContextObject.Provider>

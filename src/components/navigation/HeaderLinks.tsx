@@ -1,4 +1,4 @@
-import { ActionButton, Link, Stack, getTheme, useTheme } from "@fluentui/react";
+import { Link, Stack, useTheme } from "@fluentui/react";
 import React from "react";
 import { IActionableLinkProp } from "../../common";
 

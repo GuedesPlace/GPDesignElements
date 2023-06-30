@@ -48,7 +48,7 @@ export const PictureUploader: React.FunctionComponent<IPictureUploaderProps> = (
         event.preventDefault();
         const files = mapFileListToArray(event.target.files);
         setAddFiles(files.map(createPictureUpload));
-        if (fileInputRef && fileInputRef.current) {
+        if (fileInputRef?.current) {
             fileInputRef.current.value = '';
         }
 
