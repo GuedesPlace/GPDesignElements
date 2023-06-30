@@ -26,6 +26,10 @@ jobs:
   
         - name: SonarCloud Scan
           uses: sonarsource/sonarcloud-github-action@master
+          with:
+            args: >
+              -Dsonar.organization=guedesplace
+              -Dsonar.projectKey=GuedesPlace_GPDesignElements
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
