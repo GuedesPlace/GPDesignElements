@@ -1,6 +1,6 @@
 {
   "name": "@guedesplace/designelements",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "React UI Elements, based on Fluent UI",
   "private": false,
   "scripts": {
