@@ -9,7 +9,7 @@ export interface IPageProps {
 }
 
 export const Page:React.FunctionComponent<PropsWithChildren<IPageProps>> = (props:PropsWithChildren<IPageProps>) => {
-    return <Stack style={{marginTop:"15px", width:"100%", marginRight:"15px"}} horizontal>
+    return <Stack style={{marginTop:"15px", marginRight:"15px"}} horizontal>
         {props.navigationItems ? 
             <StackItem><Nav 
                 groups={props.navigationItems} 

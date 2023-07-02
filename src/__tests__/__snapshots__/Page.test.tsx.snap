@@ -7,7 +7,6 @@ exports[`changes the class when hovered 1`] = `
     Object {
       "marginRight": "15px",
       "marginTop": "15px",
-      "width": "100%",
     }
   }
 >
