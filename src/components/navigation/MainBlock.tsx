@@ -26,7 +26,7 @@ export const MainBlock: React.FunctionComponent<PropsWithChildren<IMainBlockProp
                     />) : null}
             </Stack>
         </StackItem>
-        <StackItem>{props.children}</StackItem>
+        <StackItem grow={10}>{props.children}</StackItem>
     </Stack>
 
 }
